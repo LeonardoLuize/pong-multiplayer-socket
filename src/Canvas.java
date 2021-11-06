@@ -24,7 +24,6 @@ class Surface extends JPanel {
 public class Canvas extends JFrame {
 
     public Canvas() {
-
         initUI();
     }
 
@@ -36,6 +35,17 @@ public class Canvas extends JFrame {
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void initGame(){
+        EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                Canvas ex = new Canvas();
+                ex.setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -23,8 +23,16 @@ public class Client {
         pw.println("hello server");
 
         String response = input.readLine();
-
         System.out.println(response);
+
+        Canvas pongScreen = new Canvas();
+        pongScreen.initGame();
+        do{
+
+
+
+        }while(isGameRunning);
+
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {

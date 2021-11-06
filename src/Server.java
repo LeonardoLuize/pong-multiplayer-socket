@@ -28,6 +28,8 @@ public class Server {
 
             receiveData(input.readLine());
 
+            Canvas pongScreen = new Canvas();
+            pongScreen.initGame();
 
         }
         while(isGameRunning);
