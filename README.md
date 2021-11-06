@@ -44,7 +44,7 @@
     </td>
     <td align="center"><a href="https://github.com/Kovalski-rgb"><img src="https://avatars.githubusercontent.com/u/81390604?s=64&v=4" width="100px;" alt=""/><br /><sub><b>André Kovalski</b></sub></a><br />
     </td>
-    <td align="center"><a href="https://github.com/LeonardoLuize"><img src="https://avatars.githubusercontent.com/u/82919838?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Danilo Alecrim</b></sub></a><br />
+    <td align="center"><a href="https://github.com/zDaniloAlmeida"><img src="https://avatars.githubusercontent.com/u/82919838?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Danilo Almeida</b></sub></a><br />
     </td>
   </tr>
 </table>
