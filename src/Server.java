@@ -5,29 +5,42 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Server {
-
     private ServerSocket server;
-    private DataOutputStream dataOut;
-    private DataInputStream dataIn;
-    private Boolean accepted;
+    private Socket client;
+    private PrintWriter out;
+    private BufferedReader input;
+    private Boolean isGameRunning;
 
-    public Server(){
+    public Server() throws IOException {
+        isGameRunning = true;
     }
 
     public void createServer(int port) throws IOException {
-        ServerSocket server = new ServerSocket(port);
-        System.out.printf("Servidor iniciado na porta %d", port);
 
-        Socket cliente = server.accept();
+        server = new ServerSocket(port);
+        System.out.printf("Servidor iniciado na porta %d\n", port);
 
-        PrintWriter out = new PrintWriter(cliente.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
+        do{
+            client = server.accept();
 
-        String greeting = in.readLine();
+            out = new PrintWriter(client.getOutputStream(), true);
+            input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-        System.out.println(greeting);
+            receiveData(input.readLine());
 
-        if ("hello server".equals(greeting)) {
+
+        }
+        while(isGameRunning);
+    }
+
+    public void stopGame(){
+        isGameRunning = false;
+    }
+
+    public void receiveData(String data){
+        System.out.println(data);
+
+        if ("hello server".equals(data)) {
             out.println("hello client");
         }
         else {
@@ -36,8 +49,14 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Digite a porta para rodar o servidor: ");
+        int port = Integer.parseInt(input.nextLine());
+
         Server pongServer = new Server();
-        pongServer.createServer(3002);
+        pongServer.createServer(port);
     }
 
 }

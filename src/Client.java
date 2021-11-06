@@ -1,26 +1,41 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Client {
-    public Client(){
+    private Boolean isGameRunning;
+    private Socket server;
+    private OutputStream out;
+    private BufferedReader input;
+    private PrintWriter pw;
 
+    public Client(){
+        isGameRunning = true;
     }
 
-    public void connectPlayer() throws IOException, InterruptedException {
-        Socket server = new Socket("localhost", 3002);
+    public void connectPlayer(String url, int port) throws IOException, InterruptedException {
+        server = new Socket(url, port);
 
-        OutputStream out = server.getOutputStream();
-        BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
+        out = server.getOutputStream();
+        input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-        PrintWriter pw = new PrintWriter(out, true);
+        pw = new PrintWriter(out, true);
         pw.println("hello server");
 
-        String response = in.readLine();
+        String response = input.readLine();
 
         System.out.println(response);
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        new Client().connectPlayer();
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Digite a url que deseja conectar: ");
+        String url = input.nextLine();
+
+        System.out.print("Digite a porta que deseja conectar: ");
+        int port = Integer.parseInt(input.nextLine());
+
+        new Client().connectPlayer(url, port);
     }
 }
