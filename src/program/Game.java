@@ -2,6 +2,7 @@ package program;
 
 import entities.Bola;
 import entities.Player;
+import util.Tela;
 
 public class Game {
 
@@ -9,6 +10,7 @@ public class Game {
 	private Player[] players;
 	private int maxPontos;
 	private int ganhador;
+	private Tela screen;
 	
 	public Game(Bola bola, Player[] players, int maxPontos) {
 		this.bola = bola;
@@ -18,7 +20,8 @@ public class Game {
 	}
 	
 	private void setup() {
-		this.bola.setPos(0, 0);
+		screen = new Tela(1000, 800);
+		this.bola.setPos(screen.getWidth()/2, screen.getHeight()/2);
 	}
 	
 	public int getGanhador() {
@@ -37,6 +40,7 @@ public class Game {
 		
 		//aqui é onde tudo vai rodar do jogo
 		while(true) {
+			
 			
 			
 			//condição para o jogo acabar: quando um player conseguir x pontos

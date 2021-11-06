@@ -40,4 +40,8 @@ public class Player {
 		return lado;
 	}
 	
+	public void setLado(boolean l) {
+		lado = l;
+	}
+	
 }
