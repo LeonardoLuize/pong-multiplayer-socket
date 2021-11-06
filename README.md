@@ -34,7 +34,7 @@
 ### 🎲 Feito por
 ---
 
- <table>
+ <table align="center">
   <tr>
     <td align="center"><a href="https://github.com/LeonardoLuize"><img src="https://avatars.githubusercontent.com/u/74014082?v=4" width="100px;" alt=""/><br /><sub><b>Leonardo Luize</b></sub></a><br />
     </td>
