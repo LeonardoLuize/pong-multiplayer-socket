@@ -17,29 +17,36 @@ public class Client {
         isGameRunning = true;
     }
 
-    public void connectPlayer(String url, int port) throws IOException, InterruptedException {
-        server = new Socket(url, port);
+    public void connectPlayer(String url, int port) throws InterruptedException {
 
-        out = server.getOutputStream();
-        input = new BufferedReader(new InputStreamReader(server.getInputStream()));
+        try{
+            server = new Socket(url, port);
 
-        pw = new PrintWriter(out, true);
-        pw.println("hello server");
+            out = server.getOutputStream();
+            input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-        String response = input.readLine();
-        System.out.println(response);
+            pw = new PrintWriter(out, true);
+            pw.println("hello server");
 
-        Canvas pongScreen = new Canvas();
-        pongScreen.initGame();
-        do{
+            String response = input.readLine();
+            System.out.println(response);
+
+            Canvas pongScreen = new Canvas();
+            pongScreen.initGame();
+            do{
 
 
 
-        }while(isGameRunning);
+            }while(isGameRunning);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
 
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
+
         Scanner input = new Scanner(System.in);
 
         System.out.print("Digite a url que deseja conectar: ");
