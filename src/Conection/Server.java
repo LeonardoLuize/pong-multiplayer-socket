@@ -1,5 +1,11 @@
-import java.io.*;
-import java.net.InetSocketAddress;
+package Conection;
+
+import Pong.Canvas;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -11,28 +17,33 @@ public class Server {
     private BufferedReader input;
     private Boolean isGameRunning;
 
-    public Server() throws IOException {
+    public Server(){
         isGameRunning = true;
     }
 
-    public void createServer(int port) throws IOException {
+    public void createServer(int port){
 
-        server = new ServerSocket(port);
-        System.out.printf("Servidor iniciado na porta %d\n", port);
+        try{
+            server = new ServerSocket(port);
+            System.out.printf("Servidor iniciado na porta %d\n", port);
 
-        do{
-            client = server.accept();
+            do{
+                client = server.accept();
 
-            out = new PrintWriter(client.getOutputStream(), true);
-            input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                out = new PrintWriter(client.getOutputStream(), true);
+                input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-            receiveData(input.readLine());
+                receiveData(input.readLine());
 
-            Canvas pongScreen = new Canvas();
-            pongScreen.initGame();
+                Canvas pongScreen = new Canvas();
+                pongScreen.initGame();
 
+            }
+            while(isGameRunning);
+        }catch(IOException e){
+            e.printStackTrace();
         }
-        while(isGameRunning);
+
     }
 
     public void stopGame(){
