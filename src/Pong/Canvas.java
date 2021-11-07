@@ -1,26 +1,8 @@
 package Pong;
 
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-class Surface extends JPanel {
-
-    private void doDrawing(Graphics g) {
-
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawString("Java 2D", 50, 50);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-
-        super.paintComponent(g);
-        doDrawing(g);
-    }
-}
 
 public class Canvas extends JFrame {
 
@@ -30,12 +12,13 @@ public class Canvas extends JFrame {
 
     private void initUI() {
 
-        add(new Surface());
+        add(new Board());
 
-        setTitle("Simple Java 2D example");
-        setSize(300, 200);
-        setLocationRelativeTo(null);
+        setSize(1200,800);
+
+        setTitle("POOng");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     public void initGame(){
@@ -51,13 +34,10 @@ public class Canvas extends JFrame {
 
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
+        EventQueue.invokeLater(()-> {
                 Canvas ex = new Canvas();
                 ex.setVisible(true);
-            }
+
         });
     }
 }
