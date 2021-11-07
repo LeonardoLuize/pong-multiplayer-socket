@@ -1,6 +1,6 @@
 package Pong;
 
-import java.awt.*;
+
 import java.awt.event.KeyEvent;
 
 
@@ -8,7 +8,7 @@ public class Player {
 
     private int dy;
     private int x = 40;
-    private int y = 400;
+    private int y = 300;
     private int w = 50;
     private int h = 200;
 
@@ -24,12 +24,9 @@ public class Player {
     }
 
     public void move() {
-        if (y >= 0 && y <= 550){y += dy;}
-        if(y < 0){y = 1;}
-        if (y > 550){
-            System.out.println("aqui");
-
-        }
+        if (y >= 0 && y < 550){y += dy;}
+        if (y < 0){y = 1;}
+        if (y >= 550){y = 548;}
 
     }
 
