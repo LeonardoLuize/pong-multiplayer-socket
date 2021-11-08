@@ -25,30 +25,51 @@ public class Client {
         try{
             server = new Socket(url, port);
 
-            out = server.getOutputStream();
-            input = new BufferedReader(new InputStreamReader(server.getInputStream()));
-
-            pw = new PrintWriter(out, true);
-            pw.println("hello server");
-
-            String response = input.readLine();
-            System.out.println(response);
-
             Canvas pongScreen = new Canvas();
-            pongScreen.setVisible(true);
-            Bola ball = new Bola();
+            Player p1 = pongScreen.getBoard().getPlayer1();
+            //Player p2 = pongScreen.getBoard().getPlayer2();
+            Bola ball = pongScreen.getBoard().getBola();
 
             pongScreen.initGame();
+            p1.loadPlayer();
             ball.loadImage();
+            //p2.loadPlayer2();
 
-            String type = input.readLine();
-            if(type.equals("player")){
-                String position = input.readLine();
-                System.out.println(position);
+            do {
+                out = server.getOutputStream();
+                input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
-            }
+                pw = new PrintWriter(out, true);
+                //pw.println("hello server");
+
+                String response = input.readLine();
+               //System.out.println(response);
+
+                if(response != null ){
+                    String[] data = response.split(";");
+
+                    if(data[0].equals("player")){
+                        p1.setY(Integer.parseInt(data[1]));
+                    }else if(data[0].equals("bola")){
+                        ball.setX(Integer.parseInt(data[1]));
+                        ball.setY(Integer.parseInt(data[2]));
+                    }
+                }
+
+            }while(isGameRunning);
+
 
 //            do{
+//                String type = input.readLine();
+//
+//                if (type != null) {
+//                    String[] data = type.split(";");
+//
+//                    if(data[0].equals("player")){
+//                        System.out.println(data[1]);
+//
+//                    }
+//                }
 //
 //
 //            }while(isGameRunning);

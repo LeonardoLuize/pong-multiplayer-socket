@@ -21,6 +21,10 @@ public class Board extends JPanel implements ActionListener {
         return player1;
     }
 
+    public Bola getBola() {
+        return bola;
+    }
+
     private final int DELAY = 10;
 
     public Board() {

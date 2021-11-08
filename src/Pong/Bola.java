@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 
 public class Bola {
 
-    private int dx;
-    private int dy;
+    private int dx = 1;
+    private int dy = 1;
     private int x = 600;
     private int y = 400;
     private int w;
@@ -17,6 +17,14 @@ public class Bola {
     public Bola() {
 
         loadImage();
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void loadImage() {

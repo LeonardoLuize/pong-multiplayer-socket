@@ -6,13 +6,19 @@ import javax.swing.JFrame;
 
 public class Canvas extends JFrame {
 
+    private Board board;
+
     public Canvas() {
+        board = new Board();
         initUI();
     }
 
-    private void initUI() {
+    public Board getBoard() {
+        return board;
+    }
 
-        add(new Board());
+    private void initUI() {
+        add(board);
 
         setSize(1200,800);
 

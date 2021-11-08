@@ -1,5 +1,6 @@
 package Conection;
 
+import Pong.Board;
 import Pong.Bola;
 import Pong.Canvas;
 import Pong.Player;
@@ -31,25 +32,42 @@ public class Server {
             System.out.printf("Servidor iniciado na porta %d\n", port);
 
 
-                client = server.accept();
+            client = server.accept();
+            int x = 0;
+
+            Canvas pongScreen = new Canvas();
+            Player p1 = pongScreen.getBoard().getPlayer1();
+            Bola ball = pongScreen.getBoard().getBola();
+
+            pongScreen.initGame();
+            p1.loadPlayer();
+            ball.loadImage();
+
+            do {
 
                 out = new PrintWriter(client.getOutputStream(), true);
                 input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-                receiveData(input.readLine());
+                ball.move();
 
-                Canvas pongScreen = new Canvas();
-                Player p1 = new Player();
-                Bola ball = new Bola();
+                out.println("player;" + p1.getY());
+                out.println("bola;" + ball.getX() + ";" + ball.getY());
 
-                pongScreen.initGame();
-                p1.loadPlayer();
-                ball.loadImage();
+                //receiveData(input.readLine());
 
-                out.print("player");
-                out.print(p1.getY());
+
+            }
+            while(isGameRunning);
+
+
 
 //            do{
+//                String data = "player;" + p1.getY();
+//
+//                if(!data.equals(sentData)){
+//                    sentData = data;
+//                    out.print(data);
+//                }
 //
 //            }
 //            while(isGameRunning);
