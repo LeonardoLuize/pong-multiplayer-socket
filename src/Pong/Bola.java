@@ -19,7 +19,7 @@ public class Bola {
         loadImage();
     }
 
-    private void loadImage() {
+    public void loadImage() {
 
         ImageIcon ii = new ImageIcon("src/Pong/professor_poo.png");
         image = ii.getImage();

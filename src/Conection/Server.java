@@ -1,6 +1,8 @@
 package Conection;
 
+import Pong.Bola;
 import Pong.Canvas;
+import Pong.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class Server {
     private PrintWriter out;
     private BufferedReader input;
     private Boolean isGameRunning;
+    private String[] position;
 
     public Server(){
         isGameRunning = true;
@@ -27,7 +30,7 @@ public class Server {
             server = new ServerSocket(port);
             System.out.printf("Servidor iniciado na porta %d\n", port);
 
-            do{
+
                 client = server.accept();
 
                 out = new PrintWriter(client.getOutputStream(), true);
@@ -36,10 +39,20 @@ public class Server {
                 receiveData(input.readLine());
 
                 Canvas pongScreen = new Canvas();
-                pongScreen.initGame();
+                Player p1 = new Player();
+                Bola ball = new Bola();
 
-            }
-            while(isGameRunning);
+                pongScreen.initGame();
+                p1.loadPlayer();
+                ball.loadImage();
+
+                out.print("player");
+                out.print(p1.getY());
+
+//            do{
+//
+//            }
+//            while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }

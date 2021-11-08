@@ -16,6 +16,11 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Bola bola;
     private Player player1;
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
     private final int DELAY = 10;
 
     public Board() {
@@ -23,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
         initBoard();
     }
 
-    private void initBoard() {
+    public void initBoard() {
 
         addKeyListener(new TAdapter());
         setBackground(Color.black);

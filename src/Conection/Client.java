@@ -1,6 +1,9 @@
 package Conection;
 
+import Pong.Board;
+import Pong.Bola;
 import Pong.Canvas;
+import Pong.Player;
 
 import java.io.*;
 import java.net.Socket;
@@ -32,12 +35,23 @@ public class Client {
             System.out.println(response);
 
             Canvas pongScreen = new Canvas();
+            pongScreen.setVisible(true);
+            Bola ball = new Bola();
+
             pongScreen.initGame();
-            do{
+            ball.loadImage();
 
+            String type = input.readLine();
+            if(type.equals("player")){
+                String position = input.readLine();
+                System.out.println(position);
 
+            }
 
-            }while(isGameRunning);
+//            do{
+//
+//
+//            }while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }
