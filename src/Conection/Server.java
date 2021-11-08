@@ -1,9 +1,6 @@
 package Conection;
 
-import Pong.Board;
-import Pong.Bola;
-import Pong.Canvas;
-import Pong.Player;
+import Pong.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,10 +34,12 @@ public class Server {
 
             Canvas pongScreen = new Canvas();
             Player p1 = pongScreen.getBoard().getPlayer1();
+            Enemy p2 = pongScreen.getBoard().getPlayer2();
             Bola ball = pongScreen.getBoard().getBola();
 
             pongScreen.initGame();
             p1.loadPlayer();
+            p2.loadPlayer();
             ball.loadImage();
 
             do {

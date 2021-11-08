@@ -16,6 +16,7 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Bola bola;
     private Player player1;
+    private Enemy player2;
 
     public Player getPlayer1() {
         return player1;
@@ -28,7 +29,6 @@ public class Board extends JPanel implements ActionListener {
     private final int DELAY = 10;
 
     public Board() {
-
         initBoard();
     }
 
@@ -38,8 +38,9 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.black);
         setFocusable(true);
 
-        bola = new Bola();
-        player1= new Player();
+        bola = new Bola(600, 400);
+        player1 = new Player();
+        player2 = new Enemy(1090, 300);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -54,6 +55,10 @@ public class Board extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
     }
 
+    public Enemy getPlayer2() {
+        return player2;
+    }
+
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -64,6 +69,10 @@ public class Board extends JPanel implements ActionListener {
         g2d.drawRect(player1.getX() + 2,
                 player1.getY() + 2,
                 player1.getWidth(),player1.getHeight());
+
+        g2d.drawRect(player2.getX() + 2,
+                player2.getY() + 2,
+                player2.getWidth(),player2.getHeight());
     }
 
     @Override
@@ -71,6 +80,7 @@ public class Board extends JPanel implements ActionListener {
 
         step_bola();
         step_player();
+        step_player2();
     }
 
     private void step_bola() {
@@ -82,6 +92,11 @@ public class Board extends JPanel implements ActionListener {
     }
     private void step_player(){
         player1.move();
+
+        repaint();
+    }
+    private void step_player2(){
+        player2.move();
 
         repaint();
     }

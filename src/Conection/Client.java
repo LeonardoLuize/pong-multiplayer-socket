@@ -1,9 +1,6 @@
 package Conection;
 
-import Pong.Board;
-import Pong.Bola;
-import Pong.Canvas;
-import Pong.Player;
+import Pong.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -27,13 +24,13 @@ public class Client {
 
             Canvas pongScreen = new Canvas();
             Player p1 = pongScreen.getBoard().getPlayer1();
-            //Player p2 = pongScreen.getBoard().getPlayer2();
+            Enemy p2 = pongScreen.getBoard().getPlayer2();
             Bola ball = pongScreen.getBoard().getBola();
 
             pongScreen.initGame();
             p1.loadPlayer();
             ball.loadImage();
-            //p2.loadPlayer2();
+            p2.loadPlayer();
 
             do {
                 out = server.getOutputStream();
@@ -49,7 +46,7 @@ public class Client {
                     String[] data = response.split(";");
 
                     if(data[0].equals("player")){
-                        p1.setY(Integer.parseInt(data[1]));
+                        p2.setY(Integer.parseInt(data[1]));
                     }else if(data[0].equals("bola")){
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));

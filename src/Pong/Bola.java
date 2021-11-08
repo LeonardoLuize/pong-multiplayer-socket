@@ -8,13 +8,17 @@ public class Bola {
 
     private int dx = 1;
     private int dy = 1;
-    private int x = 600;
-    private int y = 400;
+    private int x;
+    private int y;
     private int w;
     private int h;
     private Image image;
 
-    public Bola() {
+    public Bola(int positionX, int positionY) {
+
+        this.x = positionX;
+        this.y = positionY;
+
 
         loadImage();
     }
