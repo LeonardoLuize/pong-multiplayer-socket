@@ -65,6 +65,7 @@ public class Player {
 
         if (key == KeyEvent.VK_UP) {
             dy = -2;
+
         }
 
         if (key == KeyEvent.VK_DOWN) {

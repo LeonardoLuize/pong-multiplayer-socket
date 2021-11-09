@@ -17,6 +17,7 @@ public class Board extends JPanel implements ActionListener {
     private Bola bola;
     private Player player1;
     private Enemy player2;
+    private int yP2;
 
     public Player getPlayer1() {
         return player1;
@@ -95,10 +96,17 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
     }
-    private void step_player2(){
-        player2.move();
 
-        repaint();
+    public void setyP2(int yP2) {
+        this.yP2 = yP2;
+    }
+
+    private void step_player2(){
+        player2.move(0, yP2);
+
+        repaint(player2.getX(),
+                player2.getY(),
+                player2.getWidth(),player2.getHeight());
     }
 
     private class TAdapter extends KeyAdapter {
@@ -106,13 +114,13 @@ public class Board extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             player1.keyReleased(e);
-            player2.keyPressed(e);
+            //player2.keyPressed(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             player1.keyPressed(e);
-            player2.keyPressed(e);
+           // player2.keyPressed(e);
         }
     }
 }

@@ -30,7 +30,6 @@ public class Server {
 
 
             client = server.accept();
-            int x = 0;
 
             Canvas pongScreen = new Canvas();
             Player p1 = pongScreen.getBoard().getPlayer1();
@@ -52,24 +51,9 @@ public class Server {
                 out.println("player;" + p1.getY());
                 out.println("bola;" + ball.getX() + ";" + ball.getY());
 
-                //receiveData(input.readLine());
-
-
             }
             while(isGameRunning);
 
-
-
-//            do{
-//                String data = "player;" + p1.getY();
-//
-//                if(!data.equals(sentData)){
-//                    sentData = data;
-//                    out.print(data);
-//                }
-//
-//            }
-//            while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -78,6 +62,10 @@ public class Server {
 
     public void stopGame(){
         isGameRunning = false;
+    }
+
+    public void sendData(String data){
+        out.println(data);
     }
 
     public void receiveData(String data){

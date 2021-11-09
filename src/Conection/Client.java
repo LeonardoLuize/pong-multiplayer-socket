@@ -23,9 +23,10 @@ public class Client {
             server = new Socket(url, port);
 
             Canvas pongScreen = new Canvas();
-            Player p1 = pongScreen.getBoard().getPlayer1();
-            Enemy p2 = pongScreen.getBoard().getPlayer2();
-            Bola ball = pongScreen.getBoard().getBola();
+            Board board = pongScreen.getBoard();
+            Player p1 = board.getPlayer1();
+            Enemy p2 = board.getPlayer2();
+            Bola ball = board.getBola();
 
             pongScreen.initGame();
             p1.loadPlayer();
@@ -37,7 +38,6 @@ public class Client {
                 input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
                 pw = new PrintWriter(out, true);
-                //pw.println("hello server");
 
                 String response = input.readLine();
                //System.out.println(response);
@@ -46,7 +46,7 @@ public class Client {
                     String[] data = response.split(";");
 
                     if(data[0].equals("player")){
-                        p2.setY(Integer.parseInt(data[1]));
+                        board.setyP2(Integer.parseInt(data[1]));
                     }else if(data[0].equals("bola")){
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));
@@ -55,21 +55,6 @@ public class Client {
 
             }while(isGameRunning);
 
-
-//            do{
-//                String type = input.readLine();
-//
-//                if (type != null) {
-//                    String[] data = type.split(";");
-//
-//                    if(data[0].equals("player")){
-//                        System.out.println(data[1]);
-//
-//                    }
-//                }
-//
-//
-//            }while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }
