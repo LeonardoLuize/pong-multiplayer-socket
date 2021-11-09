@@ -1,47 +1,89 @@
 package entities;
 
 import util.Posição;
+import util.Tamanho;
 
 public class Player {
 
 	private Posição pos;
 	private int score;
 	private boolean lado;
-	//tamanho da barrinha ("goleiro") do player
-	private int tamanho;
-	
-	public Player(Posição pos, int score, boolean lado, int tamanho) {
+	private Tamanho tamanho;
+
+	public Player(Posição pos, int score, boolean lado, Tamanho tamanho) {
 		this.pos = pos;
 		this.score = score;
 		this.lado = lado;
 		this.tamanho = tamanho;
 	}
 
-	//o player só se move para cima e para baixo, movimento para cima
-	//vai ser realizado com valores negativos, e para baixo, positivos
-	//(coordenadas 0,0 são canto superior esquerdo da tela)
-	public void addPosY(int y) {
-		pos.setPosY(pos.getPosY() + y);
+	public Player() {
+		pos = new Posição();
+		tamanho = new Tamanho();
 	}
-	
-	public void addScore() {
-		score += 1;
-	}
-	
-	public int getGol() {
-		return pos.getPosX();
-	}
-	
+
+	// o player só se move para cima e para baixo, movimento para cima
+	// vai ser realizado com valores negativos, e para baixo, positivos
+	// (coordenadas 0,0 são canto superior esquerdo da tela)
+
 	public int getScore() {
 		return score;
 	}
-	
+
 	public boolean getLado() {
 		return lado;
 	}
-	
+
+	public Tamanho getTamanho() {
+		return tamanho;
+	}
+
+	public int getPosX() {
+		return pos.getPosX();
+	}
+
+	public int getPosY() {
+		return pos.getPosY();
+	}
+
+	public Posição getPos() {
+		return pos;
+	}
+
+	public int getWidth() {
+		return tamanho.getWidth();
+	}
+
+	public int getHeight() {
+		return tamanho.getHeight();
+	}
+
+	public void setPosY(int y) {
+		pos.setPosY(y);
+	}
+
+	public void setPosX(int x) {
+		pos.setPosX(x);
+	}
+
+	public void setPos(int x, int y) {
+		pos.setPos(x, y);
+	}
+
+	public void setPos(Posição p) {
+		pos.setPos(p);
+	}
+
+	public void addScore() {
+		score += 1;
+	}
+
 	public void setLado(boolean l) {
 		lado = l;
 	}
-	
+
+	public void setSize(Tamanho t) {
+		tamanho = t;
+	}
+
 }
