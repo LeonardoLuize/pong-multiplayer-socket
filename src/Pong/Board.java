@@ -106,11 +106,13 @@ public class Board extends JPanel implements ActionListener {
         @Override
         public void keyReleased(KeyEvent e) {
             player1.keyReleased(e);
+            player2.keyPressed(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             player1.keyPressed(e);
+            player2.keyPressed(e);
         }
     }
 }
