@@ -32,15 +32,14 @@ public class Server {
             client = server.accept();
             int x = 0;
 
-            Canvas pongScreen = new Canvas();
-            Player p1 = pongScreen.getBoard().getPlayer1();
-            Enemy p2 = pongScreen.getBoard().getPlayer2();
-            Bola ball = pongScreen.getBoard().getBola();
+            Player p1 = new Player(40,300);
+            Player p2 = new Player(1100, 300);
+            Bola bola = new Bola(400,300);
+            Canvas pongScreen = new Canvas(p1,p2, bola);
+            pongScreen.setVisible(true);
 
-            pongScreen.initGame();
-            p1.loadPlayer();
-            p2.loadPlayer();
-            ball.loadImage();
+
+            Bola ball = pongScreen.getBoard().getBola();
 
             do {
 

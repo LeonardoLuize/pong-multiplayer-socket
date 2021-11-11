@@ -22,15 +22,13 @@ public class Client {
         try{
             server = new Socket(url, port);
 
-            Canvas pongScreen = new Canvas();
-            Player p1 = pongScreen.getBoard().getPlayer1();
-            Enemy p2 = pongScreen.getBoard().getPlayer2();
-            Bola ball = pongScreen.getBoard().getBola();
+            Player p1 = new Player(40,300);
+            Player p2 = new Player(1100, 300);
+            Bola ball = new Bola(400,300);
+            Canvas pongScreen = new Canvas(p1,p2, ball);
+            pongScreen.setVisible(true);
 
-            pongScreen.initGame();
-            p1.loadPlayer();
-            ball.loadImage();
-            p2.loadPlayer();
+
 
             do {
                 out = server.getOutputStream();
@@ -46,7 +44,7 @@ public class Client {
                     String[] data = response.split(";");
 
                     if(data[0].equals("player")){
-                        p2.setY(Integer.parseInt(data[1]));
+                        p1.setY(Integer.parseInt(data[1]));
                     }else if(data[0].equals("bola")){
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));

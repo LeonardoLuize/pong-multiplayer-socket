@@ -1,5 +1,7 @@
 package Pong;
 
+import Pong.Player;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,8 +17,8 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Bola bola;
-    private Player player1;
-    private Enemy player2;
+    public Player player1;
+    private Player player2;
 
     public Player getPlayer1() {
         return player1;
@@ -28,19 +30,19 @@ public class Board extends JPanel implements ActionListener {
 
     private final int DELAY = 10;
 
-    public Board() {
-        initBoard();
+    public Board(Player player1, Player player2, Bola bola) {
+        initBoard(player1, player2, bola);
     }
 
-    public void initBoard() {
+    public void initBoard(Player player1, Player player2, Bola bola) {
 
         addKeyListener(new TAdapter());
         setBackground(Color.black);
         setFocusable(true);
 
-        bola = new Bola(600, 400);
-        player1 = new Player();
-        player2 = new Enemy(1090, 300);
+        this.bola = bola;
+        this.player1 = player1;
+        this.player2 = player2;
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -55,7 +57,7 @@ public class Board extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
     }
 
-    public Enemy getPlayer2() {
+    public Player getPlayer2() {
         return player2;
     }
 
@@ -80,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
 
         step_bola();
         step_player();
-        step_player2();
+        //step_player2();
     }
 
     private void step_bola() {
@@ -95,24 +97,23 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
     }
-    private void step_player2(){
-        player2.move();
+    //private void step_player2(){
+    //    player2.move();
 
-        repaint();
-    }
+     //   repaint();
+    //}
 
     private class TAdapter extends KeyAdapter {
-
         @Override
         public void keyReleased(KeyEvent e) {
             player1.keyReleased(e);
-            player2.keyPressed(e);
+            //player2.keyReleased(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             player1.keyPressed(e);
-            player2.keyPressed(e);
+            //player2.keyPressed(e);
         }
     }
 }

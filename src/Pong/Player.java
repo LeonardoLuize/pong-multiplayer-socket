@@ -4,17 +4,23 @@ package Pong;
 import java.awt.event.KeyEvent;
 
 
-public class Player {
+public class Player{
 
     private int dy;
-    private int x = 40;
-    private int y = 300;
+
+    public void setDy(int dy) {
+        this.dy = dy;
+    }
+
+    private int x;
+    private int y;
     private int w = 50;
     private int h = 200;
 
 
-    public Player() {
-
+    public Player(int x, int y) {
+        this.x = x;
+        this.y = y;
         loadPlayer();
     }
 
@@ -56,8 +62,6 @@ public class Player {
 
         return h;
     }
-
-
 
     public void keyPressed(KeyEvent e) {
 
