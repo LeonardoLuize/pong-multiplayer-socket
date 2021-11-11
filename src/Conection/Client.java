@@ -22,8 +22,8 @@ public class Client {
         try{
             server = new Socket(url, port);
 
-            Player p1 = new Player(40,300);
-            Player p2 = new Player(1100, 300);
+            Player p1 = new Player(40,300,false);
+            Player p2 = new Player(1100, 300,true);
             Bola ball = new Bola(400,300);
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);

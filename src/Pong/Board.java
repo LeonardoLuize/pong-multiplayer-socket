@@ -82,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
 
         step_bola();
         step_player();
-        //step_player2();
+        step_player2();
     }
 
     private void step_bola() {
@@ -97,23 +97,23 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
     }
-    //private void step_player2(){
-    //    player2.move();
+    private void step_player2(){
+       player2.move();
 
-     //   repaint();
-    //}
+       repaint();
+    }
 
     private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
             player1.keyReleased(e);
-            //player2.keyReleased(e);
+            player2.keyReleased(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
             player1.keyPressed(e);
-            //player2.keyPressed(e);
+            player2.keyPressed(e);
         }
     }
 }

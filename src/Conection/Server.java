@@ -31,8 +31,8 @@ public class Server {
 
             client = server.accept();
 
-            Player p1 = new Player(40,300);
-            Player p2 = new Player(1100, 300);
+            Player p1 = new Player(40,300,true);
+            Player p2 = new Player(1100, 300,false);
             Bola bola = new Bola(400,300);
             Canvas pongScreen = new Canvas(p1,p2, bola);
             pongScreen.setVisible(true);

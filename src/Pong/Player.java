@@ -7,20 +7,16 @@ import java.awt.event.KeyEvent;
 public class Player{
 
     private int dy;
-
-    public void setDy(int dy) {
-        this.dy = dy;
-    }
-
     private int x;
     private int y;
     private int w = 50;
     private int h = 200;
+    private boolean principal;
 
-
-    public Player(int x, int y) {
+    public Player(int x, int y, boolean principal) {
         this.x = x;
         this.y = y;
+        this.principal = principal;
         loadPlayer();
     }
 
@@ -30,10 +26,17 @@ public class Player{
     }
 
     public void move() {
-        if (y >= 0 && y < 550){y += dy;}
-        if (y < 0){y = 1;}
-        if (y >= 550){y = 548;}
-
+        if (principal) {
+            if (y >= 0 && y < 550) {
+                y += dy;
+            }
+            if (y < 0) {
+                y = 1;
+            }
+            if (y >= 550) {
+                y = 548;
+            }
+        }
     }
 
     public int getX() {
@@ -69,7 +72,6 @@ public class Player{
 
         if (key == KeyEvent.VK_UP) {
             dy = -2;
-
         }
 
         if (key == KeyEvent.VK_DOWN) {
