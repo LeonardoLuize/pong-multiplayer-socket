@@ -20,7 +20,12 @@ public class Bola {
         this.y = positionY;
 
 
-        loadImage();
+        ImageIcon ii = new ImageIcon("src/Pong/professor_poo.png");
+        image = ii.getImage();
+
+        w = image.getWidth(null);
+        h = image.getHeight(null);
+
     }
 
     public void setX(int x) {
@@ -31,18 +36,10 @@ public class Bola {
         this.y = y;
     }
 
-    public void loadImage() {
-
-        ImageIcon ii = new ImageIcon("src/Pong/professor_poo.png");
-        image = ii.getImage();
-
-        w = image.getWidth(null);
-        h = image.getHeight(null);
-    }
-
     //revisar
     public void move() {
 
+        //implementar colisão
         x += dx;
         y += dy;
     }

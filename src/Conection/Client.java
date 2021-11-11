@@ -54,21 +54,6 @@ public class Client {
 
             }while(isGameRunning);
 
-
-//            do{
-//                String type = input.readLine();
-//
-//                if (type != null) {
-//                    String[] data = type.split(";");
-//
-//                    if(data[0].equals("player")){
-//                        System.out.println(data[1]);
-//
-//                    }
-//                }
-//
-//
-//            }while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }
