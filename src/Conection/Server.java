@@ -30,7 +30,6 @@ public class Server {
 
 
             client = server.accept();
-            int x = 0;
 
             Player p1 = new Player(40,300);
             Player p2 = new Player(1100, 300);
@@ -51,24 +50,9 @@ public class Server {
                 out.println("player;" + p1.getY());
                 out.println("bola;" + ball.getX() + ";" + ball.getY());
 
-                //receiveData(input.readLine());
-
-
             }
             while(isGameRunning);
 
-
-
-//            do{
-//                String data = "player;" + p1.getY();
-//
-//                if(!data.equals(sentData)){
-//                    sentData = data;
-//                    out.print(data);
-//                }
-//
-//            }
-//            while(isGameRunning);
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -77,6 +61,10 @@ public class Server {
 
     public void stopGame(){
         isGameRunning = false;
+    }
+
+    public void sendData(String data){
+        out.println(data);
     }
 
     public void receiveData(String data){

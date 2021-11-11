@@ -10,6 +10,47 @@ public class Enemy {
     private int x;
     private int y;
     private int w = 50;
+
+    public int getDy() {
+        return dy;
+    }
+
+    public void setDy(int dy) {
+        this.dy = dy;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return w;
+    }
+
+    public void getWidth(int w) {
+        this.w = w;
+    }
+
+    public int getHeight() {
+        return h;
+    }
+
+    public void getHeight(int h) {
+        this.h = h;
+    }
+
     private int h = 200;
 
 
@@ -26,64 +67,9 @@ public class Enemy {
 
     }
 
-    public void move() {
-        if (y >= 0 && y < 550){y += dy;}
-        if (y < 0){y = 1;}
-        if (y >= 550){y = 548;}
-
-    }
-
-    public int getX() {
-
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getWidth() {
-
-        return w;
-    }
-
-    public int getHeight() {
-
-        return h;
-    }
-
-    public void keyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP) {
-            dy = -2;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 2;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
+    public void move(int dx, int dy){
+        this.x += dx;
+        this.y += dy;
     }
 
 }
