@@ -11,7 +11,7 @@
 ---
 
 <p>
-  Este é um projeto da máteria de POO do curso Ciência da computação,
+  Este é um projeto da máteria de POO do curso de Ciência da computação,
   ele consiste em uma conexão socket para fazer a transferência de dados
   entre cliente e servidor, após a conexão ele roda o jogo Pong e atualiza
   em tempo real.
@@ -28,7 +28,7 @@
 ---
 
 - Java
-- Java2D
+- Java2D (Awt, Swing)
 - Socket
 
 ### 🎲 Feito por
