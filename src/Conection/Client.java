@@ -35,10 +35,11 @@ public class Client {
                 input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
                 pw = new PrintWriter(out, true);
-                //pw.println("hello server");
+
+
+                pw.println("player;" + p2.getY());
 
                 String response = input.readLine();
-               //System.out.println(response);
 
                 if(response != null ){
                     String[] data = response.split(";");

@@ -66,7 +66,7 @@ public class Board extends JPanel implements ActionListener {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.drawImage(bola.getImage(), bola.getX(),
-                bola.getY(), this);
+                bola.getY(), null);
 
         g2d.drawRect(player1.getX() + 2,
                 player1.getY() + 2,

@@ -41,14 +41,21 @@ public class Server {
             Bola ball = pongScreen.getBoard().getBola();
 
             do {
-
                 out = new PrintWriter(client.getOutputStream(), true);
                 input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
-                ball.move();
-
                 out.println("player;" + p1.getY());
                 out.println("bola;" + ball.getX() + ";" + ball.getY());
+
+                String response = input.readLine();
+
+                if(response != null ){
+                    String[] data = response.split(";");
+
+                    if(data[0].equals("player")){
+                        p2.setY(Integer.parseInt(data[1]));
+                    }
+                }
 
             }
             while(isGameRunning);
