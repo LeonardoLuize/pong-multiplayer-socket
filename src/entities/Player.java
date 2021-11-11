@@ -21,10 +21,8 @@ public class Player {
 		pos = new Posição();
 		tamanho = new Tamanho();
 	}
-
-	// o player só se move para cima e para baixo, movimento para cima
-	// vai ser realizado com valores negativos, e para baixo, positivos
-	// (coordenadas 0,0 são canto superior esquerdo da tela)
+	
+	
 
 	public int getScore() {
 		return score;

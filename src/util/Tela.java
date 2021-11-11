@@ -39,7 +39,6 @@ public class Tela extends JFrame {
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.BLACK);
 		
-		
 		g.drawOval(bola.getPos().getPosX(), bola.getPos().getPosY(), bola.getTamanho().getWidth(), bola.getTamanho().getHeight());
 		g.drawRect(player1.getPosX(), player1.getPosY(), player1.getWidth(), player1.getHeight()); // player da esquerda
 		g.drawRect(player2.getPosX(), player2.getPosY(), player2.getWidth(), player2.getHeight()); // player da direita

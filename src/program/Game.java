@@ -21,7 +21,7 @@ public class Game {
 
 	private void setup() {
 		screen = new Tela(400, 400);
-		bola.setPos(screen.getScreenHeight() / 2, screen.getScreenHeight() / 2);
+		bola.setPos(screen.getScreenHeight()-60, screen.getScreenHeight() / 2);
 		screen.setBallSize(bola.getTamanho().getWidth());
 		screen.setPlayersSize(players[0].getTamanho(), players[1].getTamanho());
 		players[1].setPosX(screen.getScreenWidth() - players[0].getPosX() - players[1].getWidth());
@@ -40,13 +40,23 @@ public class Game {
 	}
 
 	public void start() {
+		
 		// aqui é onde tudo vai rodar
 		while (true) {
 			
-			if(bola.getPos().getPosX() > screen.getScreenWidth()) {
-				bola.setPos(screen.getScreenHeight() / 2, bola.getPos().getPosY());
+			if(bola.colidiuBorda(screen)) {
+				bola.colisaoBorda(screen);
 			}
-			bola.setPos(bola.getPos().getPosX()+1, bola.getPos().getPosY());
+			
+			if(bola.colidiuPlayer(players)) {
+				bola.colisaoPlayer();
+			}
+			
+			players[0].setPosY(bola.getPos().getPosY()-10);
+			players[1].setPosY(bola.getPos().getPosY()-10);
+			
+			bola.mover();
+			
 			screen.drawScreen(players[0].getPos(), players[1].getPos(), bola.getPos());
 			// players[0].addScore();
 
