@@ -9,20 +9,20 @@ public class Player {
 	private int score;
 	private boolean lado;
 	private Tamanho tamanho;
+	private int velocidade;
 
-	public Player(Posição pos, int score, boolean lado, Tamanho tamanho) {
+	public Player(Posição pos, int score, boolean lado, Tamanho tamanho, int velocidade) {
 		this.pos = pos;
 		this.score = score;
 		this.lado = lado;
 		this.tamanho = tamanho;
+		this.velocidade = velocidade;
 	}
 
 	public Player() {
 		pos = new Posição();
 		tamanho = new Tamanho();
 	}
-	
-	
 
 	public int getScore() {
 		return score;
@@ -36,12 +36,14 @@ public class Player {
 		return tamanho;
 	}
 
+	//-1 nos 2 getters pq tem o offset do retangulo
+	
 	public int getPosX() {
-		return pos.getPosX();
+		return pos.getPosX() - 1;
 	}
 
 	public int getPosY() {
-		return pos.getPosY();
+		return pos.getPosY() - 1;
 	}
 
 	public Posição getPos() {
@@ -84,4 +86,10 @@ public class Player {
 		tamanho = t;
 	}
 
+	public void mover(int i, int telaY, int telaYmin) {
+		if(pos.getPosY()+tamanho.getHeight() + i*velocidade < telaY && pos.getPosY() + i * velocidade > telaYmin + 8) {
+			setPosY(pos.getPosY() + i * velocidade);
+		}
+	}
+	
 }

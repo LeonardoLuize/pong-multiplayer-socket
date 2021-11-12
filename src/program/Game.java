@@ -21,10 +21,11 @@ public class Game {
 
 	private void setup() {
 		screen = new Tela(400, 400);
-		bola.setPos(screen.getScreenHeight()-60, screen.getScreenHeight() / 2);
 		screen.setBallSize(bola.getTamanho().getWidth());
 		screen.setPlayersSize(players[0].getTamanho(), players[1].getTamanho());
+		screen.addKeyListener(screen);
 		players[1].setPosX(screen.getScreenWidth() - players[0].getPosX() - players[1].getWidth());
+		
 	}
 
 	public int getGanhador() {
@@ -35,7 +36,7 @@ public class Game {
 		if (lado) {
 			ganhador = 1;
 		} else {
-			ganhador = 0;
+			ganhador = 2;
 		}
 	}
 
@@ -49,21 +50,28 @@ public class Game {
 			}
 			
 			if(bola.colidiuPlayer(players)) {
-				bola.colisaoPlayer();
+				bola.colisaoPlayer(players);
 			}
 			
-			players[0].setPosY(bola.getPos().getPosY()-10);
-			players[1].setPosY(bola.getPos().getPosY()-10);
+			if(bola.fezGol(players[0])) {
+				players[0].addScore();
+				bola.setPos(screen.getScreenWidth()/2, screen.getScreenHeight()/2);
+			}
 			
+			if(bola.fezGol(players[1])) {
+				players[1].addScore();
+				bola.setPos(screen.getScreenWidth()/2, screen.getScreenHeight()/2);
+			}
+			
+			players[0].mover(screen.getMovPlayer(0), screen.getScreenHeight(), screen.getBarraTela());
+			players[1].mover(screen.getMovPlayer(1), screen.getScreenHeight(), screen.getBarraTela());
 			bola.mover();
 			
 			screen.drawScreen(players[0].getPos(), players[1].getPos(), bola.getPos());
-			// players[0].addScore();
 
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

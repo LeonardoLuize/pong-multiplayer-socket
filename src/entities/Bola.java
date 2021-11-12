@@ -8,14 +8,15 @@ public class Bola {
 
 	int[] way = new int[2];
 	private Posição pos;
-	// ainda tenho q ver como q eu uso essa variavel
 	private Tamanho tamanho;
+	private int velocidade;
 
-	public Bola(Posição pos, int x, int y, Tamanho tamanho) {
+	public Bola(Posição pos, int x, int y, Tamanho tamanho, int velocidade) {
 		this.pos = pos;
-		way[0] = 1; // x
-		way[1] = 1; // y
+		way[0] = x;
+		way[1] = y;
 		this.tamanho = tamanho;
+		this.velocidade = velocidade;
 	}
 
 	public Bola() {
@@ -40,26 +41,41 @@ public class Bola {
 		tamanho.setWidth(t);
 	}
 
-	public boolean fezGol(Player p) {
-		return false;
-	}
-
-	public boolean colidiuPlayer(Player[] p) {
-		for (Player player : p) {
-			if (player.getPosX() < pos.getPosX() && player.getPosX() + player.getWidth() > pos.getPosX()
-					&& player.getPosY() < pos.getPosY() && player.getPosY() + player.getHeight() > pos.getPosY()) {
+	public boolean fezGol(Player pl) {
+		if (pl.getLado()) {// direita
+			if (pos.getPosX() > pl.getPosX() + pl.getWidth()) {
+				return true;
+			}
+		} else {// esquerda
+			if (pos.getPosX() < pl.getPosX()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void colisaoPlayer() {
+	public boolean colidiuPlayer(Player[] p) {
+		Posição[] pontos = pontosDeColisão();
+		for (Player player : p) {
+			for (Posição pontoCirculo : pontos) {
+				if (player.getPosX() < pontoCirculo.getPosX()
+						&& player.getPosX() + player.getTamanho().getWidth() / 2 > pontoCirculo.getPosX()
+						&& player.getPosY() < pontoCirculo.getPosY()
+						&& player.getPosY() + player.getTamanho().getHeight() > pontoCirculo.getPosY()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public void colisaoPlayer(Player[] p) {
 		if (way[0] == 1) {
 			way[0] = -1;
 		} else {
 			way[0] = 1;
 		}
+		
 	}
 
 	public boolean colidiuBorda(Tela t) {
@@ -67,13 +83,13 @@ public class Bola {
 			return false;
 		}
 
-		// lado esquerdo / cima
-		if (t.getHeight() < pos.getPosY() || t.getWidth() < pos.getPosX() || pos.getPosX() < 0 || pos.getPosY() < 0) {
+		Posição[] p = pontosDeColisão();
+		// cima
+		if (p[3].getPosY() < t.getBarraTela()) {
 			return true;
 		}
-		// lado direito / baixo
-		if (t.getHeight() < pos.getPosY() + tamanho.getHeight() * 2
-				|| t.getWidth() < pos.getPosX() + tamanho.getWidth() * 2 || pos.getPosX() < 0 || pos.getPosY() < 0) {
+		// baixo
+		if (t.getScreenHeight() < p[2].getPosY()) {
 			return true;
 		}
 
@@ -82,15 +98,14 @@ public class Bola {
 
 	public boolean[] checaLadoColisao(Tela t) {
 		boolean[] b = new boolean[2];
-		// caso a bola saia verticalmente da tela:
-		// System.out.printf("tH: %d, pY: %d\ntW: %d, pX: %d\n\n", t.getHeight(),
-		// pos.getPosY(), t.getWidth(), pos.getPosX());
-
-		if (t.getWidth() <= pos.getPosX() + tamanho.getWidth() * 2 || 0 >= pos.getPosX()) {
+		Posição[] p = pontosDeColisão();
+		// esquerda / direita
+		if (t.getScreenWidth() < p[0].getPosX() || p[1].getPosX() < 0) {
 			b[0] = true;
 		}
 
-		if (t.getHeight() <= pos.getPosY() + tamanho.getHeight() * 2 || 0 >= pos.getPosY()) {
+		// cima / baixo
+		if (t.getScreenHeight() < p[2].getPosY() || p[3].getPosY() < t.getBarraTela()) {
 			b[1] = true;
 		}
 		return b;
@@ -102,8 +117,27 @@ public class Bola {
 		return inverteCaminho(way, lado);
 	}
 
+	public Posição[] pontosDeColisão() {
+		Posição[] pontos = new Posição[4];
+
+		for (int i = 0; i < 4; i++) {
+			pontos[i] = new Posição();
+		}
+
+		// as coordenadas no centro tem um offset de -1 pra o x e para o y
+		int x = pos.getPosX();
+		int y = pos.getPosY();
+
+		pontos[0].setPos(x + tamanho.getWidth(), y); // direita
+		pontos[1].setPos(x - tamanho.getWidth(), y); // esquerda
+		pontos[2].setPos(x, y + tamanho.getHeight()); // baixo
+		pontos[3].setPos(x, y - tamanho.getHeight()); // cima
+
+		return pontos;
+	}
+
 	public void mover() {
-		setPos(pos.getPosX() + way[0], pos.getPosY() + way[1]);
+		setPos(pos.getPosX() + way[0] * velocidade, pos.getPosY() + way[1] * velocidade);
 	}
 
 	public int[] inverteCaminho(int[] c, boolean[] b) {
