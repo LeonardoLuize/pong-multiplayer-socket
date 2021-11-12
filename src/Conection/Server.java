@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Server {
@@ -25,21 +26,30 @@ public class Server {
     public void createServer(int port){
 
         try{
+            /*
+             * Criação do servidor
+             */
             server = new ServerSocket(port);
             System.out.printf("Servidor iniciado na porta %d\n", port);
 
 
             client = server.accept();
 
+            /*
+             * Criação dos players e da bola.
+             * O server é o Player1 pois principal = true
+             */
             Player p1 = new Player(40,300,true);
             Player p2 = new Player(1100, 300,false);
-            Bola ball = new Bola(400,300);
+            Bola ball = new Bola(400,300, 3);
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
 
 
 
-
+            /*
+             * Envio de dados para o cliente
+             */
             do {
                 out = new PrintWriter(client.getOutputStream(), true);
                 input = new BufferedReader(new InputStreamReader(client.getInputStream()));

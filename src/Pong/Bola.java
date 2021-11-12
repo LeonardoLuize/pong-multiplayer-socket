@@ -1,6 +1,7 @@
 package Pong;
 
 import java.awt.Image;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 public class Bola {
@@ -12,18 +13,30 @@ public class Bola {
     private int w;
     private int h;
     private Image image;
+    public String arquivo;
 
     /*
      * Construtor da Bola.
      * a imagem da bola será aleatória, variando com os rostos dos desenvolvedores.
      */
-    public Bola(int positionX, int positionY) {
+    public Bola(int positionX, int positionY, int gerador) {
 
         this.x = positionX;
         this.y = positionY;
 
 
-        ImageIcon ii = new ImageIcon("src/Pong/professor_poo.png");
+        switch (gerador){
+            case 1:
+                arquivo = "src/Pong/professor_poo.png";
+                break;
+            case 2:
+                arquivo = "src/Pong/Daniel.png";
+                break;
+            case 3:
+                arquivo = "src/Pong/Leo.png";
+                break;
+        }
+        ImageIcon ii = new ImageIcon(arquivo);
         image = ii.getImage();
 
         w = image.getWidth(null);

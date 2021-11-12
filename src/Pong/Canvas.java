@@ -8,7 +8,8 @@ public class Canvas extends JFrame {
     private Board board;
     /*
     * Construtor com players e bola
-    * */
+    *
+    */
     public Canvas(Player player1, Player player2, Bola bola) {
         board = new Board(player1, player2, bola);
         initUI();

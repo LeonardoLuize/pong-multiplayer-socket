@@ -4,6 +4,7 @@ import Pong.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Client {
@@ -21,15 +22,20 @@ public class Client {
 
         try{
             server = new Socket(url, port);
-
+            /*
+             *  Criação dos players e da bola.
+             * O Cliente é o Player2 pois principal = true
+             */
             Player p1 = new Player(40,300,false);
             Player p2 = new Player(1100, 300,true);
-            Bola ball = new Bola(400,300);
+            Bola ball = new Bola(400,300, 3);
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
 
 
-
+            /*
+             * Envio de dados para o servidor
+             */
             do {
                 out = server.getOutputStream();
                 input = new BufferedReader(new InputStreamReader(server.getInputStream()));
