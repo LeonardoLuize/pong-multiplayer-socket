@@ -13,29 +13,26 @@ public class Player{
     private int h = 200;
     private boolean principal;
 
+    /*
+     Construtor com x, y (Posição) e uma variável booleana
+     para o metodo move() funcionar
+     */
     public Player(int x, int y, boolean principal) {
         this.x = x;
         this.y = y;
         this.principal = principal;
-        loadPlayer();
-    }
-
-    public void loadPlayer() {
-
 
     }
 
+
+    /*
+     * método com mudança de posição.
+     */
     public void move() {
         if (principal) {
-            if (y >= 0 && y < 550) {
-                y += dy;
-            }
-            if (y < 0) {
-                y = 1;
-            }
-            if (y >= 550) {
-                y = 548;
-            }
+            if (y >= 0 && y < 550) {y += dy;} //incrementa dy a y no escopo da tela
+            if (y < 0) {y = 1;} // limite superior da tela
+            if (y >= 550) {y = 548;} //limite inferior da tela
         }
     }
 
@@ -46,10 +43,6 @@ public class Player{
 
     public int getY() {
         return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public void setY(int y) {
@@ -66,6 +59,11 @@ public class Player{
         return h;
     }
 
+
+    /*
+    * Ao apertar a tecla, muda o valor de dy.
+    * dy incrementa o valor de y no move()
+    * */
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
@@ -78,7 +76,10 @@ public class Player{
             dy = 2;
         }
     }
-
+    /*
+     * Ao soltar a tecla, dy = 0.
+     * Fazendo com que y não mude no move()
+     */
     public void keyReleased(KeyEvent e) {
 
         int key = e.getKeyCode();

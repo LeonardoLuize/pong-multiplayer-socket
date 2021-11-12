@@ -1,7 +1,6 @@
 package Pong;
 
 import java.awt.Image;
-import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
 public class Bola {
@@ -14,6 +13,10 @@ public class Bola {
     private int h;
     private Image image;
 
+    /*
+     * Construtor da Bola.
+     * a imagem da bola será aleatória, variando com os rostos dos desenvolvedores.
+     */
     public Bola(int positionX, int positionY) {
 
         this.x = positionX;
@@ -36,6 +39,12 @@ public class Bola {
         this.y = y;
     }
 
+
+    /*
+     *  Método move() da bola.
+     *  Aqui deve conter os paramentros de colisão com a parede superior e inferior.
+     *  os paramentros de colisão com os players e o servidor devem ser implementados na classe Server e Client
+     */
     //revisar
     public void move() {
 

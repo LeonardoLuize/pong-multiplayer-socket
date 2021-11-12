@@ -33,12 +33,12 @@ public class Server {
 
             Player p1 = new Player(40,300,true);
             Player p2 = new Player(1100, 300,false);
-            Bola bola = new Bola(400,300);
-            Canvas pongScreen = new Canvas(p1,p2, bola);
+            Bola ball = new Bola(400,300);
+            Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
 
 
-            Bola ball = pongScreen.getBoard().getBola();
+
 
             do {
                 out = new PrintWriter(client.getOutputStream(), true);

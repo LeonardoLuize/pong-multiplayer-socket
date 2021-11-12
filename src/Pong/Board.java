@@ -1,7 +1,5 @@
 package Pong;
 
-import Pong.Player;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,6 +11,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/*
+    BOARD extende Jpanel (Herança) e implementa o ActionListener
+ */
 public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
@@ -20,16 +21,11 @@ public class Board extends JPanel implements ActionListener {
     public Player player1;
     private Player player2;
 
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Bola getBola() {
-        return bola;
-    }
 
     private final int DELAY = 10;
-
+    /*
+     *Construtor com players e bola
+     * */
     public Board(Player player1, Player player2, Bola bola) {
         initBoard(player1, player2, bola);
     }
@@ -39,7 +35,7 @@ public class Board extends JPanel implements ActionListener {
         addKeyListener(new TAdapter());
         setBackground(Color.black);
         setFocusable(true);
-
+        //atribui os players e bola do construtor aos da classe board
         this.bola = bola;
         this.player1 = player1;
         this.player2 = player2;
@@ -48,6 +44,9 @@ public class Board extends JPanel implements ActionListener {
         timer.start();
     }
 
+    /*
+     * Desenho efetivo dos gráficos
+     * */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -57,9 +56,9 @@ public class Board extends JPanel implements ActionListener {
         Toolkit.getDefaultToolkit().sync();
     }
 
-    public Player getPlayer2() {
-        return player2;
-    }
+    /*
+    * Desenho dos Players e da Bola
+    * */
 
     private void doDrawing(Graphics g) {
 
@@ -77,6 +76,9 @@ public class Board extends JPanel implements ActionListener {
                 player2.getWidth(),player2.getHeight());
     }
 
+    /*
+    * É invocado caso uma ação ocorre
+    * */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -85,6 +87,10 @@ public class Board extends JPanel implements ActionListener {
         step_player2();
     }
 
+    /*
+    * Movimentação e re-pintura da bola e dos players
+    * aplicados no metodo actionPerformed
+    * */
     private void step_bola() {
 
         bola.move();
@@ -103,6 +109,9 @@ public class Board extends JPanel implements ActionListener {
        repaint();
     }
 
+    /*
+     * Aqui ocorre polimorfismo por extender a classe abstrata KeyAdapter
+     */
     private class TAdapter extends KeyAdapter {
         @Override
         public void keyReleased(KeyEvent e) {
