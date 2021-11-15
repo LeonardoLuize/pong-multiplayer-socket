@@ -18,6 +18,7 @@ public class Bola {
 
 
 
+
     /*
      * Construtor da Bola.
      * a imagem da bola será aleatória, variando com os rostos dos desenvolvedores.
@@ -60,6 +61,8 @@ public class Bola {
     public void setDy(int dy) {this.dy = dy;}
 
     public void setDirecao(boolean direcao) {this.direcao = direcao;}
+    public boolean getDirecao() {return direcao;}
+
 
     /*
      *  Método move() da bola.

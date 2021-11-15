@@ -5,15 +5,18 @@ import javax.swing.JFrame;
 
 public class Canvas extends JFrame {
 
-    private Board board;
+    public Board board;
+
     /*
     * Construtor com players e bola
     *
     */
-    public Canvas(Player player1, Player player2, Bola bola) {
-        board = new Board(player1, player2, bola);
+    public Canvas(Player player1, Player player2, Bola bola, int pontuacaop1, int pontuacaop2) {
+        board = new Board(player1, player2, bola, pontuacaop1, pontuacaop2);
         initUI();
     }
+
+
 
     private void initUI() {
         add(board);

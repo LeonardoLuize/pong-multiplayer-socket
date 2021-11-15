@@ -31,7 +31,7 @@ public class Client {
             Bola ball = new Bola(400,300, 3);
             int pontuacaop1 = 0;
             int pontuacaop2 = 0;
-            Canvas pongScreen = new Canvas(p1,p2, ball);
+            Canvas pongScreen = new Canvas(p1,p2, ball,pontuacaop1, pontuacaop2);
             pongScreen.setVisible(true);
 
 
@@ -61,6 +61,52 @@ public class Client {
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));
                     }
+                }
+                /*
+                 * Colisão com o Player1
+                 *
+                 * */
+                if (ball.getX()== 90 && ((ball.getY() > p1.getY()) && (ball.getY() < p1.getY() + 65))){
+                    ball.setDy(-1);
+                    ball.setDirecao(true);
+                }
+                if (ball.getX()== 90 && ((ball.getY() > p1.getY() + 65) && (ball.getY() < p1.getY() + 130) )){
+                    ball.setDirecao(true);
+                    ball.setDy(0);
+                }
+                if (ball.getX() == 90 && (ball.getY() > p1.getY() + 130 && (ball.getY() < p2.getY() + 200))){
+                    ball.setDy(1);
+                    ball.setDirecao(true);
+                }
+                /*
+                 * Colisão com o Player2
+                 *
+                 * */
+                if (ball.getX()== 1000 && ((ball.getY() > p2.getY()) && (ball.getY() < p2.getY() + 65))){
+                    ball.setDy(-1);
+                    ball.setDirecao(false);
+                }
+                if (ball.getX()== 1000  && ((ball.getY() > p2.getY() + 65) && (ball.getY() < p2.getY() + 130))){
+                    ball.setDirecao(false);
+                    ball.setDy(0);
+                }
+                if (ball.getX() == 1000  && ((ball.getY() > p2.getY() + 130) && (ball.getY() < p2.getY() + 200))){
+                    ball.setDy(1);
+                    ball.setDirecao(false);
+                }
+                /*
+                 * pontuação Player1 e Player2
+                 * */
+                if (ball.getX() < 80){
+                    pongScreen.board.setPontuacaop1(1);
+                    ball.setX(400);
+                    ball.setY(300);
+
+                }
+                if (ball.getX() > 1100){
+                    pongScreen.board.setPontuacaop2(1);
+                    ball.setX(400);
+                    ball.setY(300);
                 }
 
             }while(isGameRunning);

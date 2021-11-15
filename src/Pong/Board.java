@@ -28,11 +28,11 @@ public class Board extends JPanel implements ActionListener {
     /*
      *Construtor com players e bola
      * */
-    public Board(Player player1, Player player2, Bola bola) {
-        initBoard(player1, player2, bola);
+    public Board(Player player1, Player player2, Bola bola, int pontuacaop1, int pontuacaop2) {
+        initBoard(player1, player2, bola, pontuacaop1, pontuacaop2);
     }
 
-    public void initBoard(Player player1, Player player2, Bola bola) {
+    public void initBoard(Player player1, Player player2, Bola bola, int pontuacaop1, int pontuacaop2) {
 
         addKeyListener(new TAdapter());
         setBackground(Color.black);
@@ -41,6 +41,8 @@ public class Board extends JPanel implements ActionListener {
         this.bola = bola;
         this.player1 = player1;
         this.player2 = player2;
+        this.pontuacaop1 = pontuacaop1;
+        this.pontuacaop2 = pontuacaop2;
 
 
         timer = new Timer(DELAY, this);
@@ -66,6 +68,14 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public String toString() {
         return pontuacaop1 + " : " + pontuacaop2;
+    }
+
+    public void setPontuacaop1(int pontuacaop1) {
+        this.pontuacaop1 += pontuacaop1;
+    }
+
+    public void setPontuacaop2(int pontuacaop2) {
+        this.pontuacaop2 += pontuacaop2;
     }
 
     private void doDrawing(Graphics g) {
