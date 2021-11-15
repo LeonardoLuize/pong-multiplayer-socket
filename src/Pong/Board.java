@@ -20,6 +20,8 @@ public class Board extends JPanel implements ActionListener {
     private Bola bola;
     public Player player1;
     private Player player2;
+    public int pontuacaop1;
+    public int pontuacaop2;
 
 
     private final int DELAY = 10;
@@ -39,6 +41,7 @@ public class Board extends JPanel implements ActionListener {
         this.bola = bola;
         this.player1 = player1;
         this.player2 = player2;
+
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -60,6 +63,11 @@ public class Board extends JPanel implements ActionListener {
     * Desenho dos Players e da Bola
     * */
 
+    @Override
+    public String toString() {
+        return pontuacaop1 + " : " + pontuacaop2;
+    }
+
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -74,6 +82,8 @@ public class Board extends JPanel implements ActionListener {
         g2d.drawRect(player2.getX() + 2,
                 player2.getY() + 2,
                 player2.getWidth(),player2.getHeight());
+
+        g2d.drawString(toString(), 400,30);
     }
 
     /*
@@ -85,6 +95,7 @@ public class Board extends JPanel implements ActionListener {
         step_bola();
         step_player();
         step_player2();
+
     }
 
     /*
@@ -108,6 +119,8 @@ public class Board extends JPanel implements ActionListener {
 
        repaint();
     }
+
+
 
     /*
      * Aqui ocorre polimorfismo por extender a classe abstrata KeyAdapter

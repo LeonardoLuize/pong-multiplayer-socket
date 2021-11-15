@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 public class Bola {
 
-    private int dx = 1;
+    private int dx = 0;
     private int dy = 1;
     private int x;
     private int y;
@@ -14,6 +14,9 @@ public class Bola {
     private int h;
     private Image image;
     public String arquivo;
+    private boolean direcao = false;
+
+
 
     /*
      * Construtor da Bola.
@@ -52,18 +55,32 @@ public class Bola {
         this.y = y;
     }
 
+    public void setDx(int dx) {this.dx = dx;}
+
+    public void setDy(int dy) {this.dy = dy;}
+
+    public void setDirecao(boolean direcao) {this.direcao = direcao;}
 
     /*
      *  Método move() da bola.
      *  Aqui deve conter os paramentros de colisão com a parede superior e inferior.
      *  os paramentros de colisão com os players e o servidor devem ser implementados na classe Server e Client
      */
-    //revisar
     public void move() {
-
-        //implementar colisão
         x += dx;
         y += dy;
+
+        if (direcao){
+            dx = 1;
+        }else{
+            dx = -1;
+        }
+
+        if (y == 0){
+            dy = 1;
+        }else if (y == 650){
+            dy = -1;
+        }
     }
 
     public int getX() {

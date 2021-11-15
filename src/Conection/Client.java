@@ -29,8 +29,12 @@ public class Client {
             Player p1 = new Player(40,300,false);
             Player p2 = new Player(1100, 300,true);
             Bola ball = new Bola(400,300, 3);
+            int pontuacaop1 = 0;
+            int pontuacaop2 = 0;
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
+
+
 
 
             /*
@@ -52,7 +56,8 @@ public class Client {
 
                     if(data[0].equals("player")){
                         p1.setY(Integer.parseInt(data[1]));
-                    }else if(data[0].equals("bola")){
+                    }
+                    if(data[0].equals("bola")){
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));
                     }

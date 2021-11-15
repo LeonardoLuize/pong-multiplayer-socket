@@ -42,8 +42,11 @@ public class Server {
             Player p1 = new Player(40,300,true);
             Player p2 = new Player(1100, 300,false);
             Bola ball = new Bola(400,300, 3);
+            int pontuacaop1 = 0;
+            int pontuacaop2 = 0;
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
+
 
 
 
@@ -67,6 +70,45 @@ public class Server {
                     }
                 }
 
+                /*
+                * Colisão com o Player1
+                *
+                * */
+                if (ball.getX()== 90 && (ball.getY() < p1.getY() + 65)){
+                    ball.setDy(-1);
+                    ball.setDirecao(true);
+                }
+                if (ball.getX()== 90 && ((ball.getY() > p1.getY() + 65) && (ball.getY() < p1.getY() + 130) )){
+                    ball.setDirecao(true);
+                }
+                if (ball.getX() == 90 && (ball.getY() > p1.getY() + 130)){
+                    ball.setDy(1);
+                    ball.setDirecao(true);
+                }
+                /*
+                 * Colisão com o Player2
+                 *
+                 * */
+                if (ball.getX()== 1000 && (ball.getY() < p2.getY() + 65)){
+                    ball.setDy(-1);
+                    ball.setDirecao(false);
+                }
+                if (ball.getX()== 1000  && ((ball.getY() > p2.getY() + 65) && (ball.getY() < p2.getY() + 130) )){
+                    ball.setDirecao(false);
+                }
+                if (ball.getX() == 1000  && (ball.getY() > p2.getY() + 130)){
+                    ball.setDy(1);
+                    ball.setDirecao(false);
+                }
+                /*
+                * pontuação Player1
+                * */
+                if (ball.getX() < 90){
+                   // pontuacaop1 += 1
+                }
+                if (ball.getX() > 1000){
+                    //pontuacaop2 += 1
+                }
             }
             while(isGameRunning);
 
