@@ -80,7 +80,7 @@ public class Server {
                     ball.setDirecao(true);
                     ball.setDy(0);
                 }
-                if (ball.getX() == 90 && (ball.getY() > p1.getY() + 130 && (ball.getY() < p2.getY() + 200))){
+                if (ball.getX() == 90 && (ball.getY() > p1.getY() + 130 && (ball.getY() < p1.getY() + 200))){
                     ball.setDy(1);
                     ball.setDirecao(true);
                 }
