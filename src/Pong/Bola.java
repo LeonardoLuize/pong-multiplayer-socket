@@ -1,113 +1,152 @@
-package Pong;
+package pong;
 
 import java.awt.Image;
-import java.util.Random;
+
 import javax.swing.ImageIcon;
 
-public class Bola {
+import util.Posicao;
+import util.Tamanho;
 
-    private int dx = 0;
-    private int dy = 1;
-    private int x;
-    private int y;
-    private int w;
-    private int h;
-    private Image image;
-    public String arquivo;
-    private boolean direcao = false;
+public class Bola extends Entidade {
 
+	private Image image;
+	private String arquivo;
+	private boolean direcao = false;
 
+	/*
+	 * Construtor da Bola. a imagem da bola sera aleatoria, variando com os rostos
+	 * dos desenvolvedores.
+	 */
+	public Bola(int positionX, int positionY, int gerador) {
 
+		direcaoX = 0;
+		direcaoY = 1;
+		pos = new Posicao(positionX, positionY);
 
-    /*
-     * Construtor da Bola.
-     * a imagem da bola será aleatória, variando com os rostos dos desenvolvedores.
-     */
-    public Bola(int positionX, int positionY, int gerador) {
+		switch (gerador) {
+		case 1:
+			arquivo = "src/pong/Daniel.png";
+			break;
+		case 2:
+			arquivo = "src/pong/Leo.png";
+			break;
+		case 3:
+			arquivo = "src/pong/Bola.png";
+			break;
+		case 4:
+			arquivo = "src/pong/professor_poo.png";
+			break;
+		}
+		ImageIcon ii = new ImageIcon(arquivo);
+		image = ii.getImage();
 
-        this.x = positionX;
-        this.y = positionY;
+		tamanho = new Tamanho(image.getWidth(null), image.getHeight(null));
 
+	}
 
-        switch (gerador){
-            case 1:
-                arquivo = "src/Pong/professor_poo.png";
-                break;
-            case 2:
-                arquivo = "src/Pong/Daniel.png";
-                break;
-            case 3:
-                arquivo = "src/Pong/Leo.png";
-                break;
-        }
-        ImageIcon ii = new ImageIcon(arquivo);
-        image = ii.getImage();
+	public void setDx(int dx) {
+		this.direcaoX = dx;
+	}
 
-        w = image.getWidth(null);
-        h = image.getHeight(null);
+	public void setDy(int dy) {
+		this.direcaoY = dy;
+	}
 
-    }
+	public void setDirecao(boolean direcao) {
+		this.direcao = direcao;
+	}
 
-    public void setX(int x) {
-        this.x = x;
-    }
+	public boolean getDirecao() {
+		return direcao;
+	}
 
-    public void setY(int y) {
-        this.y = y;
-    }
+	/*
+	 * Metodo move() da bola. Aqui deve conter os paramentros de colisao com a
+	 * parede superior e inferior. Os paramentros de colisao com os players e o
+	 * servidor devem ser implementados na classe Server e Client
+	 */
 
-    public void setDx(int dx) {this.dx = dx;}
+	public boolean aBolaColidiuComPlayer(Player p1, Player p2) {
+		// Colisao com o Player1
+		if (pos.getY() > p1.getY() && (pos.getY() < p1.getY() + p1.getHeight())) {
+			return true;
+		}
 
-    public void setDy(int dy) {this.dy = dy;}
+		// Colisao com o Player2
+		if (pos.getY() > p2.getY() && (pos.getY() < p2.getY() + p2.getHeight())) {
+			return true;
+		}
 
-    public void setDirecao(boolean direcao) {this.direcao = direcao;}
-    public boolean getDirecao() {return direcao;}
+		return false;
+	}
 
+	public void elaColidiuSim(Player p1, Player p2) {
 
-    /*
-     *  Método move() da bola.
-     *  Aqui deve conter os paramentros de colisão com a parede superior e inferior.
-     *  os paramentros de colisão com os players e o servidor devem ser implementados na classe Server e Client
-     */
-    public void move() {
-        x += dx;
-        y += dy;
+		if (pos.getX() == 90 && ((pos.getY() > p1.getY()) && (pos.getY() < p1.getY() + 65))) {
+			setDy(-1);
+			setDirecao(true);
+		}
+		if (pos.getX() == 90 && ((pos.getY() > p1.getY() + 65) && (pos.getY() < p1.getY() + 130))) {
+			setDirecao(true);
+			setDy(0);
+		}
+		if (pos.getX() == 90 && (pos.getY() > p1.getY() + 130 && (pos.getY() < p1.getY() + 200))) {
+			setDy(1);
+			setDirecao(true);
+		}
 
-        if (direcao){
-            dx = 1;
-        }else{
-            dx = -1;
-        }
+		// Colisao com o Player2
+		if (pos.getX() == 1000 && ((pos.getY() > p2.getY()) && (pos.getY() < p2.getY() + 65))) {
+			setDy(-1);
+			setDirecao(false);
+		}
+		if (pos.getX() == 1000 && ((pos.getY() > p2.getY() + 65) && (pos.getY() < p2.getY() + 130))) {
+			setDirecao(false);
+			setDy(0);
+		}
+		if (pos.getX() == 1000 && ((pos.getY() > p2.getY() + 130) && (pos.getY() < p2.getY() + 200))) {
+			setDy(1);
+			setDirecao(false);
+		}
+	}
 
-        if (y == 0){
-            dy = 1;
-        }else if (y == 650){
-            dy = -1;
-        }
-    }
+	public void mover() {
+		pos.setX(pos.getX() + direcaoX * velocidade);
+		pos.setY(pos.getY() + direcaoY * velocidade);
 
-    public int getX() {
+		if (direcao) {
+			direcaoX = 1;
+		} else {
+			direcaoX = -1;
+		}
 
-        return x;
-    }
+		if (pos.getY() == 0) {
+			direcaoY = 1;
+		} else if (pos.getY() == 650) {
+			direcaoY = -1;
+		}
+	}
 
-    public int getY() {
+	public boolean goleou(int x) {
+		if (x == 80) {
+			if (getX() < 80) {
+				return true;
+			}
+		}
+		if (x == 1100) {
+			if (getX() > 1100) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-        return y;
-    }
+	public void resetPos() {
+		setX(400);
+		setY(300);
+	}
 
-    public int getWidth() {
-
-        return w;
-    }
-
-    public int getHeight() {
-
-        return h;
-    }
-
-    public Image getImage() {
-
-        return image;
-    }
+	public Image getImage() {
+		return image;
+	}
 }

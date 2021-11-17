@@ -1,18 +1,18 @@
-package Pong;
+package pong;
 
 import javax.swing.JFrame;
 
 
 public class Canvas extends JFrame {
 
-    public Board board;
+	private static final long serialVersionUID = 1L;
+	private Board board;
 
     /*
     * Construtor com players e bola
-    *
     */
-    public Canvas(Player player1, Player player2, Bola bola, int pontuacaop1, int pontuacaop2) {
-        board = new Board(player1, player2, bola, pontuacaop1, pontuacaop2);
+    public Canvas(Player player1, Player player2, Bola bola) {
+        board = new Board(player1, player2, bola);
         initUI();
     }
 
@@ -23,7 +23,7 @@ public class Canvas extends JFrame {
 
         setSize(1200,800);
 
-        setTitle("POOng");
+        setTitle("Pong");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }

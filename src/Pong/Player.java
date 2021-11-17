@@ -1,99 +1,76 @@
-package Pong;
-
+package pong;
 
 import java.awt.event.KeyEvent;
 
+import util.Posicao;
+import util.Tamanho;
 
-public class Player{
+public class Player extends Entidade {
 
-    private int dy;
-    private int x;
-    private int y;
-    private int w = 50;
-    private int h = 200;
-    private boolean principal;
+	private boolean principal;
+	private int pontuacao;
 
-    /*
-     Construtor com x, y (Posição) e uma variável booleana
-     para o metodo move() funcionar
-     */
-    public Player(int x, int y, boolean principal) {
-        this.x = x;
-        this.y = y;
-        this.principal = principal;
+	// Construtor com posicao e uma variavel booleana para o metodo move() funcionar
+	public Player(int x, int y, boolean principal) {
+		pos = new Posicao(x, y);
+		tamanho = new Tamanho(50, 200);
+		this.principal = principal;
+		pontuacao = 0;
+	}
 
-    }
+	public int getPontuacao() {
+		return pontuacao;
+	}
 
+	public void pontuou() {
+		this.pontuacao += 1;
+	}
 
-    /*
-     * método com mudança de posição.
-     */
-    public void move() {
-        if (principal) {
-            if (y >= 0 && y < 550) {y += dy;} //incrementa dy a y no escopo da tela
-            if (y < 0) {y = 1;} // limite superior da tela
-            if (y >= 550) {y = 548;} //limite inferior da tela
-        }
-    }
+	// metodo com mudanca de posicao.
+	public void mover() {
+		int y = pos.getY();
+		if (principal) {
+			// soma a dire��o com a posi��o atual (dentro da tela)
+			if (y >= 0 && y < 550) {
+				pos.setY(y + direcaoY * velocidade);
+			}
 
-    public int getX() {
+			// limite superior da tela
+			if (y < 0) {
+				pos.setY(1);
+			}
 
-        return x;
-    }
+			// limite inferior da tela
+			if (y >= 550) {
+				pos.setY(548);
+			}
+		}
+	}
 
-    public int getY() {
-        return y;
-    }
+	// Ao apertar a tecla, muda o valor de dy. dy incrementa o valor de y no move()
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
 
-    public void setX(int x) {this.x = x;}
+		if (key == KeyEvent.VK_UP) {
+			direcaoY = -2;
+		}
 
-    public void setY(int y) {
-        this.y = y;
-    }
+		if (key == KeyEvent.VK_DOWN) {
+			direcaoY = 2;
+		}
+	}
 
-    public int getWidth() {
+	// Ao soltar a tecla, dy = 0. Fazendo com que y nao mude no move()
+	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
 
-        return w;
-    }
+		if (key == KeyEvent.VK_UP) {
+			direcaoY = 0;
+		}
 
-    public int getHeight() {
-
-        return h;
-    }
-
-
-    /*
-    * Ao apertar a tecla, muda o valor de dy.
-    * dy incrementa o valor de y no move()
-    * */
-    public void keyPressed(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP) {
-            dy = -2;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 2;
-        }
-    }
-    /*
-     * Ao soltar a tecla, dy = 0.
-     * Fazendo com que y não mude no move()
-     */
-    public void keyReleased(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP) {
-            dy = 0;
-        }
-
-        if (key == KeyEvent.VK_DOWN) {
-            dy = 0;
-        }
-    }
-
+		if (key == KeyEvent.VK_DOWN) {
+			direcaoY = 0;
+		}
+	}
 
 }
