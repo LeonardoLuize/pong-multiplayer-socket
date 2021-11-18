@@ -1,5 +1,5 @@
 <h1 align="center">
-  Pong Socket
+  pong Socket
 </h1>
 <p align="center">Trabalho TDE - programação orientada a objetos</p>
 
@@ -13,7 +13,7 @@
 <p>
   Este é um projeto da máteria de POO do curso de Ciência da computação,
   ele consiste em uma conexão socket para fazer a transferência de dados
-  entre cliente e servidor, após a conexão ele roda o jogo Pong e atualiza
+  entre cliente e servidor, após a conexão ele roda o jogo pong e atualiza
   em tempo real.
 </p>
 

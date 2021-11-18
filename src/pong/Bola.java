@@ -24,16 +24,16 @@ public class Bola extends Entidade {
 		pos = new Posicao(positionX, positionY);
 
 		switch (gerador) {
-		case 1:
+		case 0:
 			arquivo = "src/pong/Daniel.png";
 			break;
-		case 2:
+		case 1:
 			arquivo = "src/pong/Leo.png";
 			break;
-		case 3:
+		case 2:
 			arquivo = "src/pong/Bola.png";
 			break;
-		case 4:
+		case 3:
 			arquivo = "src/pong/professor_poo.png";
 			break;
 		}

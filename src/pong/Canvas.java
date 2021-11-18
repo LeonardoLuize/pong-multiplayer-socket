@@ -23,7 +23,7 @@ public class Canvas extends JFrame {
 
         setSize(1200,800);
 
-        setTitle("Pong");
+        setTitle("pong");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
