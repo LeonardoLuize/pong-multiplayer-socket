@@ -66,7 +66,7 @@ public class Bola extends Entidade {
 	 * servidor devem ser implementados na classe Server e Client
 	 */
 
-	public Posicao[] pontosDeColisão() {
+	public Posicao[] pontosDeColisao() {
 		Posicao[] pontos = new Posicao[4];
 
 		for (int i = 0; i < 4; i++) {
@@ -87,7 +87,7 @@ public class Bola extends Entidade {
 	public boolean aBolaColidiuComPlayer(Player p1, Player p2) {
 		// Colisao com o Player1
 
-		Posicao[] pontos = pontosDeColisão();
+		Posicao[] pontos = pontosDeColisao();
 
 		if (pontos[1].getY() > p1.getY() && (pontos[1].getY() < p1.getY() + p1.getHeight())) {
 			return true;
@@ -103,7 +103,7 @@ public class Bola extends Entidade {
 
 	public void elaColidiuSim(Player p1, Player p2) {
 
-		Posicao[] pontos = pontosDeColisão();
+		Posicao[] pontos = pontosDeColisao();
 
 		if (pontos[1].getX() <= p1.getX() + p1.getWidth()
 				&& ((pontos[1].getY() > p1.getY()) && (pontos[1].getY() < p1.getY() + 65))) {

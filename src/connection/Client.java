@@ -2,7 +2,6 @@ package connection;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 import pong.*;
 
