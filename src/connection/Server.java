@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 
 import pong.*;
 
@@ -25,14 +26,23 @@ public class Server {
 		try {
 			// Instanciando o servidor
 			server = new ServerSocket(port);
+
+
 			System.out.printf("Servidor iniciado na porta %d\n", port);
+			Random random = new Random();
+			int randomNumber = random.nextInt(3);
 
 			client = server.accept();
+
+			out = new PrintWriter(client.getOutputStream(), true);
+			input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
+			out.println(randomNumber);
 
 			// Instanciando os players e a bola. Server -> Player1 pois principal = true
 			Player p1 = new Player(40, 300, true);
 			Player p2 = new Player(1100, 300, false);
-			Bola ball = new Bola(400, 300, 3);
+			Bola ball = new Bola(400, 300, randomNumber);
 			Canvas pongScreen = new Canvas(p1, p2, ball);
 			pongScreen.setVisible(true);
 
@@ -103,8 +113,10 @@ public class Server {
 		int port = Integer.parseInt(input.nextLine());
  		*/		
 		// settei a porta padrão como 21
+		
 		Server pongServer = new Server();
 		pongServer.createServer(21);
+		
 		//input.close();
 	}
 

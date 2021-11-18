@@ -2,7 +2,6 @@ package connection;
 
 import java.io.*;
 import java.net.Socket;
-
 import pong.*;
 
 public class Client {
@@ -20,18 +19,25 @@ public class Client {
 
         try{
             server = new Socket(url, port);
+
+            out = server.getOutputStream();
+            input = new BufferedReader(new InputStreamReader(server.getInputStream()));
+
+            String randomNumber = input.readLine();
             /*
              *  Criacao dos players e da bola.
              *  Cliente -> Player2, pois principal = true
              */
-            Player p1 = new Player(40, 300, false);
-            Player p2 = new Player(1100, 300, true);
-            Bola ball = new Bola(400, 300, 3);
+            
+            Player p1 = new Player(40, 300,false);
+            Player p2 = new Player(1100, 300,true);
+            Bola ball = new Bola(400, 300, Integer.parseInt(randomNumber));
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
 
             // Envio de dados para o servidor
             do {
+
                 out = server.getOutputStream();
                 input = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
@@ -87,6 +93,7 @@ public class Client {
         System.out.print("Digite a porta que deseja conectar: ");
         int port = Integer.parseInt(input.nextLine());
     	*/
+    	
         new Client().connectPlayer(null, 21);
         
         //input.close();
