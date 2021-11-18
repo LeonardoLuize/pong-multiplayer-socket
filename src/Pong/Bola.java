@@ -19,8 +19,8 @@ public class Bola extends Entidade {
 	 */
 	public Bola(int positionX, int positionY, int gerador) {
 
-		direcaoX = 0;
-		direcaoY = 1;
+		direcaoX = -1;
+		direcaoY = 0;
 		pos = new Posicao(positionX, positionY);
 
 		switch (gerador) {
@@ -66,14 +66,35 @@ public class Bola extends Entidade {
 	 * servidor devem ser implementados na classe Server e Client
 	 */
 
+	public Posicao[] pontosDeColisão() {
+		Posicao[] pontos = new Posicao[4];
+
+		for (int i = 0; i < 4; i++) {
+			pontos[i] = new Posicao();
+		}
+
+		int x = getX();
+		int y = getY();
+
+		pontos[0].setPos(x + tamanho.getW(), y + tamanho.getH() / 2); // direita
+		pontos[1].setPos(x, y + tamanho.getH() / 2); 				  // esquerda
+		pontos[2].setPos(x + tamanho.getW() / 2, y + tamanho.getH()); // baixo
+		pontos[3].setPos(x + tamanho.getW() / 2, y); 				  // cima
+
+		return pontos;
+	}
+
 	public boolean aBolaColidiuComPlayer(Player p1, Player p2) {
 		// Colisao com o Player1
-		if (pos.getY() > p1.getY() && (pos.getY() < p1.getY() + p1.getHeight())) {
+
+		Posicao[] pontos = pontosDeColisão();
+
+		if (pontos[1].getY() > p1.getY() && (pontos[1].getY() < p1.getY() + p1.getHeight())) {
 			return true;
 		}
 
 		// Colisao com o Player2
-		if (pos.getY() > p2.getY() && (pos.getY() < p2.getY() + p2.getHeight())) {
+		if (pontos[0].getY() > p2.getY() && (pontos[0].getY() < p2.getY() + p2.getHeight())) {
 			return true;
 		}
 
@@ -82,29 +103,36 @@ public class Bola extends Entidade {
 
 	public void elaColidiuSim(Player p1, Player p2) {
 
-		if (pos.getX() == 90 && ((pos.getY() > p1.getY()) && (pos.getY() < p1.getY() + 65))) {
+		Posicao[] pontos = pontosDeColisão();
+
+		if (pontos[1].getX() <= p1.getX() + p1.getWidth()
+				&& ((pontos[1].getY() > p1.getY()) && (pontos[1].getY() < p1.getY() + 65))) {
 			setDy(-1);
 			setDirecao(true);
 		}
-		if (pos.getX() == 90 && ((pos.getY() > p1.getY() + 65) && (pos.getY() < p1.getY() + 130))) {
+		if (pontos[1].getX() <= p1.getX() + p1.getWidth()
+				&& ((pontos[1].getY() > p1.getY() + 65) && (pontos[1].getY() < p1.getY() + 130))) {
 			setDirecao(true);
 			setDy(0);
 		}
-		if (pos.getX() == 90 && (pos.getY() > p1.getY() + 130 && (pos.getY() < p1.getY() + 200))) {
+		if (pontos[1].getX() <= p1.getX() + p1.getWidth()
+				&& ((pontos[1].getY() > p1.getY() + 130) && (pontos[1].getY() < p1.getY() + 200))) {
 			setDy(1);
 			setDirecao(true);
 		}
 
 		// Colisao com o Player2
-		if (pos.getX() == 1000 && ((pos.getY() > p2.getY()) && (pos.getY() < p2.getY() + 65))) {
+		if (pontos[0].getX() >= p2.getX() && ((pontos[0].getY() > p2.getY()) && (pontos[0].getY() < p2.getY() + 65))) {
 			setDy(-1);
 			setDirecao(false);
 		}
-		if (pos.getX() == 1000 && ((pos.getY() > p2.getY() + 65) && (pos.getY() < p2.getY() + 130))) {
+		if (pontos[0].getX() >= p2.getX()
+				&& ((pontos[0].getY() > p2.getY() + 65) && (pontos[0].getY() < p2.getY() + 130))) {
 			setDirecao(false);
 			setDy(0);
 		}
-		if (pos.getX() == 1000 && ((pos.getY() > p2.getY() + 130) && (pos.getY() < p2.getY() + 200))) {
+		if (pontos[0].getX() >= p2.getX()
+				&& ((pontos[0].getY() > p2.getY() + 130) && (pontos[0].getY() < p2.getY() + 200))) {
 			setDy(1);
 			setDirecao(false);
 		}
@@ -120,22 +148,25 @@ public class Bola extends Entidade {
 			direcaoX = -1;
 		}
 
-		if (pos.getY() == 0) {
+		if (pos.getY() <= 0) {
 			direcaoY = 1;
-		} else if (pos.getY() == 650) {
+		} else if (pos.getY() >= 650) {
 			direcaoY = -1;
 		}
 	}
 
-	public boolean goleou(int x) {
-		if (x == 80) {
-			if (getX() < 80) {
+	public boolean goleou(Player p) {
+		if (p.getX() < 500) {
+			// player1 - esse 50 é meio q pra calibrar um pouco até aonde a bola ve que é
+			// player e onde que é gol
+			if (p.getX() + p.getWidth() - 50 >= pos.getX()) {
 				return true;
 			}
-		}
-		if (x == 1100) {
-			if (getX() > 1100) {
+		} else {
+			// player2
+			if (p.getX() <= pos.getX()) {
 				return true;
+
 			}
 		}
 		return false;

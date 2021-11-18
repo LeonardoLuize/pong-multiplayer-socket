@@ -2,7 +2,6 @@ package pong;
 
 import javax.swing.JFrame;
 
-
 public class Canvas extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -15,8 +14,6 @@ public class Canvas extends JFrame {
         board = new Board(player1, player2, bola);
         initUI();
     }
-
-
 
     private void initUI() {
         add(board);

@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 // BOARD extende Jpanel (Heranca) e implementa o ActionListener
 public class Board extends JPanel implements ActionListener {
 
@@ -48,10 +47,16 @@ public class Board extends JPanel implements ActionListener {
 		
 		// Desenho dos Players e da Bola
 		Graphics2D g2d = (Graphics2D) g;
+
+
+		g.setColor(Color.DARK_GRAY);
+		g2d.drawLine(getWidth()/2 - g.getFont().getSize()/4, 0, getWidth()/2 - g.getFont().getSize()/4, getHeight());
 		g2d.drawImage(bola.getImage(), bola.getX(), bola.getY(), null);
+		g.setColor(Color.WHITE);
 		g2d.drawRect(player1.getX() + 2, player1.getY() + 2, player1.getWidth(), player1.getHeight());
 		g2d.drawRect(player2.getX() + 2, player2.getY() + 2, player2.getWidth(), player2.getHeight());
-		g2d.drawString(toString(), 400, 30);
+		g2d.setFont(g.getFont().deriveFont(g.getFont().getSize() * 5F));
+		g2d.drawString(toString(), getWidth()/2 - g.getFont().getSize(), getHeight()/3);
 	}
 
 	// E invocado caso uma acao ocorra

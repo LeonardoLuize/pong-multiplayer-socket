@@ -9,6 +9,11 @@ public class Posicao {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Posicao() {
+		this.x = 0;
+		this.y = 0;
+	}
 
 	public int getX() {
 		return x;
@@ -26,6 +31,11 @@ public class Posicao {
 		this.y = y;
 	}
 
+	public void setPos(int x, int y) {
+		this.y = y;
+		this.x = x;
+	}
+	
 	public void setPos(Posicao p) {
 		this.y = p.getY();
 		this.x = p.getX();

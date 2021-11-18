@@ -25,8 +25,8 @@ public class Client {
              *  Criacao dos players e da bola.
              *  Cliente -> Player2, pois principal = true
              */
-            Player p1 = new Player(40, 300,false);
-            Player p2 = new Player(1100, 300,true);
+            Player p1 = new Player(40, 300, false);
+            Player p2 = new Player(1100, 300, true);
             Bola ball = new Bola(400, 300, 3);
             Canvas pongScreen = new Canvas(p1,p2, ball);
             pongScreen.setVisible(true);
@@ -59,12 +59,12 @@ public class Client {
 				}
                 
                 // pontuacao Player1 e Player2
-                if (ball.goleou(80)){
+                if (ball.goleou(p1)){
                     p1.pontuou();
                     ball.resetPos();
                 }
                 
-                if (ball.goleou(1100)){
+                if (ball.goleou(p2)){
                     p2.pontuou();
                     ball.resetPos();
                 }

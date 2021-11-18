@@ -60,12 +60,12 @@ public class Server {
 				}
 
 				// pontuacao Player1 e Player2
-				if (ball.goleou(80)) {
+				if (ball.goleou(p1)) {
 					p1.pontuou();
 					ball.resetPos();
 				}
 
-				if (ball.goleou(1100)) {
+				if (ball.goleou(p2)) {
 					p2.pontuou();
 					ball.resetPos();
 				}
