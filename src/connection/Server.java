@@ -53,6 +53,7 @@ public class Server {
 
 				out.println("player;" + p1.getY());
 				out.println("bola;" + ball.getX() + ";" + ball.getY());
+				out.println("score;" + p1.getPontuacao() + ";" + p2.getPontuacao());
 
 				String response = input.readLine();
 

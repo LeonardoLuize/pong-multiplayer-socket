@@ -57,6 +57,10 @@ public class Client {
                         ball.setX(Integer.parseInt(data[1]));
                         ball.setY(Integer.parseInt(data[2]));
                     }
+                    if(data[0].equals("score")){
+                        p1.setPontuacao(Integer.parseInt(data[1]));
+                        p2.setPontuacao(Integer.parseInt(data[2]));
+                    }
                 }
                 
                 if(ball.aBolaColidiuComPlayer(p1, p2)) {
@@ -65,12 +69,10 @@ public class Client {
                 
                 // pontuacao Player1 e Player2
                 if (ball.goleou(p1)){
-                    p1.pontuou();
                     ball.resetPos();
                 }
-                
+
                 if (ball.goleou(p2)){
-                    p2.pontuou();
                     ball.resetPos();
                 }
 

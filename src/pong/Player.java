@@ -10,6 +10,10 @@ public class Player extends Entidade {
 	private boolean principal;
 	private int pontuacao;
 
+	public void setPontuacao(int pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+
 	// Construtor com posicao e uma variavel booleana para o metodo move() funcionar
 	public Player(int x, int y, boolean principal) {
 		pos = new Posicao(x, y);
@@ -30,7 +34,7 @@ public class Player extends Entidade {
 	public void mover() {
 		int y = pos.getY();
 		if (principal) {
-			// soma a direção com a posição atual (dentro da tela)
+			// soma a direï¿½ï¿½o com a posiï¿½ï¿½o atual (dentro da tela)
 			if (y >= 0 && y < 550) {
 				pos.setY(y + direcaoY * velocidade);
 			}
