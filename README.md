@@ -4,7 +4,7 @@
 <p align="center">Trabalho TDE - programação orientada a objetos</p>
 
 <h4 align="center"> 
-	- Status: 🔃 -
+	- Status: ✅ -
 </h4>
 
 ### ☑️ Sobre
